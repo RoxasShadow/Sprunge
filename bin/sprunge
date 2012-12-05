@@ -1,0 +1,39 @@
+#--
+#  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#              Sirius Fucking Licence 1.2 "ShitStorm"
+#             Do the fuck you want. Get the fuck off.
+#      Using this licence don't make you more trasgressive.
+#             And doesn't mean you're not an asshole.
+#  ~~~~~~~~~~~~~~~*The quiet after the shitstorm*~~~~~~~~~~~~~~~-~~~
+#                     Sirius Fucking Manifesto
+#   With this software pubblication licence you can modify, rewrite
+#   rape, burn, kill, delete, fuck, do nothing. In few words:
+#          DO DAFUQ YOU WANT AND DON'T EXCORIATE MY BALLS
+#  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#++
+#!/usr/bin/env ruby
+require 'optparse'
+require 'sprunge'
+
+options = {}
+
+OptionParser.new do |o|
+  options[:text]        = ''
+  options[:language]    = ''
+  
+  o.on '-f', '--file FILE', '' do |file|
+    options[:text]  = file
+  end
+  
+  o.on '-t', '--text TEXT', '' do |text|
+    options[:text]  = text
+  end
+  
+  o.on '-l', '--language LANGUAGE', 'enables syntax highlighter' do |language|
+    options[:language]  = language
+  end
+  
+end.parse!
+
+url = Sprunge::send options[:text] options[:language]
+puts Sprunge::valid?(url) ? url : 'Upload failed.'
