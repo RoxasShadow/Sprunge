@@ -32,8 +32,7 @@ OptionParser.new do |o|
   o.on '-l', '--language LANGUAGE', 'enables syntax highlighter' do |language|
     options[:language]  = language
   end
-  
 end.parse!
 
-url = Sprunge::send options[:text], options[:language]
+url = (options.empty? && ARGV.one?) ? Sprunge::send(ARGV[0]) : Sprunge::send(options[:text], options[:language])
 puts Sprunge::valid?(url) ? url : 'Upload failed.'
