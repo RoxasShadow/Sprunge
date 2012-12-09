@@ -20,7 +20,7 @@ module Sprunge
     
     uri     = URI 'http://sprunge.us'
     params  = { 'sprunge' => str }
-    return Net::HTTP.post_form(uri, params).body + (lang.to_s.empty? ? "?#{lang}" : '').strip
+    return (Net::HTTP.post_form(uri, params).body + (lang.to_s.empty? ? "?#{lang}" : '')).gsub(/\s+/, '')[0..-2]
   end
   
   def self.is_valid?(uri)
