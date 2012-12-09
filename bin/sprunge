@@ -12,27 +12,9 @@
 #  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #++
 #!/usr/bin/env ruby
-require 'optparse'
 require 'sprunge'
 
-options = {}
+abort 'Usage: sprunge SOURCE [LANGUAGE]' if ARGV.empty?
 
-OptionParser.new do |o|
-  options[:text]        = ''
-  options[:language]    = ''
-  
-  o.on '-f', '--file FILE', '' do |file|
-    options[:text]  = file
-  end
-  
-  o.on '-t', '--text TEXT', '' do |text|
-    options[:text]  = text
-  end
-  
-  o.on '-l', '--language LANGUAGE', 'enables syntax highlighter' do |language|
-    options[:language]  = language
-  end
-end.parse!
-
-url = (options.empty? && ARGV.one?) ? Sprunge::send(ARGV[0]) : Sprunge::send(options[:text], options[:language])
+url = Sprunge::send ARGV[0], ARGV[1]
 puts Sprunge::valid?(url) ? url : 'Upload failed.'
