@@ -35,5 +35,5 @@ OptionParser.new do |o|
   
 end.parse!
 
-url = Sprunge::send options[:text] options[:language]
+url = Sprunge::send options[:text], options[:language]
 puts Sprunge::valid?(url) ? url : 'Upload failed.'
